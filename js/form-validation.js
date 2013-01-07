@@ -9,7 +9,6 @@
   (function(d, validator) {
     var logInfo;
     validator.debug = true;
-    validator.errors = [];
     validator.setup = function(form) {
       /*
       		if you want to validate the field as the user tabs away from
@@ -27,13 +26,15 @@
       invalidMsg = $(el).data('invalidMsg');
       err = void 0;
       requiredMsg = 'This is a required field';
+      el.setCustomValidity('');
       if (el.validity) {
-        el.setCustomValidity(' ');
         if (el.validity.valueMissing) {
+          el.setCustomValidity(' ');
           logInfo(elName + ' has a missing value and it is required');
           return err = new validator.Err(el.id, requiredMsg);
         }
-        if (!el.validity.valid && el.value !== null) {
+        if (!el.validity.valid) {
+          el.setCustomValidity(' ');
           logInfo(elName + ' is an invalid field');
           return err = new validator.Err(el.id, invalidMsg);
         }
@@ -53,13 +54,16 @@
       return err;
     };
     validator.validateForm = function(fields) {
-      return $(fields).each(function() {
+      var errors;
+      errors = [];
+      $(fields).each(function() {
         var error;
         error = validator.checkField(this);
         if (error) {
-          return validator.errors.push(error);
+          errors.push(error);
         }
       });
+      return errors;
     };
     validator.listen = function(node, type, fn, capture) {
       if (validator.isHostMethod(window, 'addEventListener')) {

@@ -49,6 +49,7 @@ window.Validator ?= {}
 			error = validator.checkField @
 			if error
 				errors.push error
+				return
 
 		return errors
 
