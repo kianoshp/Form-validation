@@ -6,9 +6,11 @@
     window.Validator = {};
   }
 
-  (function(d, validator) {
+  window.Validator.debug = true;
+
+  (function(validator) {
     var logInfo;
-    validator.debug = true;
+    validator.debug = validator.debug || true;
     validator.setup = function(form) {
       /*
       		if you want to validate the field as the user tabs away from
@@ -92,11 +94,11 @@
     validator.Err.prototype.toString = function() {
       return 'error field --> ' + this.formField.toString() + ', errorMsg --> ' + this.errorMsg.toString();
     };
-    return logInfo = function(msg) {
+    logInfo = function(msg) {
       if (validator.debug) {
         return console.info(msg);
       }
     };
-  })(document, window.Validator);
+  })(window.Validator);
 
 }).call(this);

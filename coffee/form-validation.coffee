@@ -1,7 +1,8 @@
 window.Validator ?= {}
+window.Validator.debug = true
 
-((d, validator) ->
-	validator.debug = true
+((validator) ->
+	validator.debug = validator.debug or true
 
 	validator.setup = (form) ->
 		###
@@ -81,4 +82,6 @@ window.Validator ?= {}
 	logInfo = (msg) ->
 		if validator.debug
 			console.info msg
-) document, window.Validator
+
+	return
+) window.Validator
