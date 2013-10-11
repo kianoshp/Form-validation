@@ -40,6 +40,6 @@ iframe{width:500px; height:500px; border:none;}
 .required, .error {color:#CC0000; font-weight:bold;}
 
 .error-highlight {
-    outline-color: #CC0000;
+    border-color: #CC0000;
     background-color: #cecece;
 }
