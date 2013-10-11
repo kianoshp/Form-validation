@@ -16,19 +16,19 @@
 			<form id="testForm">
 					<fieldset>
 						<legend>Data Validation</legend>
-						<label for="userName">User Name<span id="required">*</span>:</label> 
+						<label for="userName">User Name<span class="required">*</span>:</label> 
 						<input type="text" id="userName" required="required" name="userName">
 						<br/>
-						<label for="userEmail">Email Address<span id="required">*</span>:</label>
+						<label for="userEmail">Email Address<span class="required">*</span>:</label>
  						<input type="email" id="userEmail" required="required" name="userEmail" pattern="[a-z0-9!#$%&s+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)" data-invalid-msg="Please write a properly formatted email">
 						<br>
-						<label for="userPhone">Primary Phone<span id="required">*</span>:</label> 
-						<input type="tel" id="userPhone" required="required" name="userPhone" pattern="[0-9]{10}">
+						<label for="userPhone">Primary Phone<span class="required">*</span>:</label> 
+						<input type="tel" id="userPhone" required="required" name="userPhone" pattern="[0-9]{10}" data-invalid-msg="Please write the phone number as 10 digits">
 						<br>
 						<label for="userCell">Cell Phone:</label> 
-						<input type="tel" id="userCell" name="userCell" pattern="[0-9]{10}">
+						<input type="tel" id="userCell" name="userCell" pattern="[0-9]{10}"  data-invalid-msg="Please write the phone number as 10 digits">
 						<br>
-						<label for="description">Description<span id="required">*</span>:</label> 
+						<label for="description">Description<span class="required">*</span>:</label> 
 						<textarea id="description" required="required" name="description"></textarea>
 						<br><span id="counter"></span>
 						<br>
@@ -46,11 +46,13 @@
 		{
 			var errors = [];
 			e.preventDefault();
+            resetErrors();
 			var thisForm = $(this).closest('form');
 			errors = Validator.validateForm($(thisForm).find('input, textarea, select'));
 
 			if(errors.length > 0)
 				console.log("we have errors, display them to the user");
+                showErrors(errors);
 			// $(thisForm).find('input, textarea, select').each(function() {
 			// 	validator.checkField(this);
 			// });
@@ -72,7 +74,26 @@
 					this.reset();
 				});
 			});
-	 });
+	   });
+        
+        function showErrors(errors) {
+            var dataLen = errors.length;
+            while(dataLen--) {
+                var errorEl = $('<div/>', {
+                    class: 'error'
+                });
+                var error = errors[dataLen];
+                $(errorEl).text(error.errorMsg);
+                $('#' + error.formField)
+                    .addClass('error-highlight');
+                $(errorEl).insertAfter('#' + error.formField);
+            }
+        }
+        
+        function resetErrors() {
+            $('div.error').remove();
+            $('.error-hightlight').removeClass('error-highlight');
+        }
 
 	</script>
 </html>
