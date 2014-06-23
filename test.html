@@ -68,11 +68,15 @@
 		*/
 		
 			$('#submitButton').bind('click', submitForm);
-			$('#resetButton').bind('click', function() {
+			$('#resetButton').bind('click', function(e) {
+				e.preventDefault();
+
 				var thisForm = $(this).closest('form');
 				$(thisForm).each(function() {
 					this.reset();
 				});
+
+				resetErrors();
 			});
 	   });
         
@@ -88,7 +92,7 @@
                 
                 error = errors[dataLen];
                 
-            	$(errorEl).text(error.errorMsg);
+                $(errorEl).text(error.errorMsg);
                 $('#' + error.formField)
                     .addClass('error-highlight');
                 $(errorEl).insertAfter('#' + error.formField);
