@@ -44,18 +44,18 @@
 	<script language="javascript" type="text/javascript">
 		function submitForm(e)
 		{
-			var errors = [];
 			e.preventDefault();
+			var errors = [],
+				thisForm = $(this).closest('form');
+            
             resetErrors();
-			var thisForm = $(this).closest('form');
+
 			errors = Validator.validateForm($(thisForm).find('input, textarea, select'));
 
-			if(errors.length > 0)
+			if(errors.length > 0) {
 				console.log("we have errors, display them to the user");
-                showErrors(errors);
-			// $(thisForm).find('input, textarea, select').each(function() {
-			// 	validator.checkField(this);
-			// });
+                showErrors(errors);				
+			}
 		}
 		
 		$(document).ready(function() {
@@ -78,12 +78,17 @@
         
         function showErrors(errors) {
             var dataLen = errors.length;
+            
             while(dataLen--) {
-                var errorEl = $('<div/>', {
+            	var errorEl, error;
+                
+                errorEl = $('<div/>', {
                     class: 'error'
                 });
-                var error = errors[dataLen];
-                $(errorEl).text(error.errorMsg);
+                
+                error = errors[dataLen];
+                
+            	$(errorEl).text(error.errorMsg);
                 $('#' + error.formField)
                     .addClass('error-highlight');
                 $(errorEl).insertAfter('#' + error.formField);
