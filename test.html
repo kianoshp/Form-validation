@@ -4,105 +4,111 @@
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-	<head>
-		<title>Testing form validation</title>
-		<link rel="stylesheet" type="text/css" href="css/main.css" TITLE="MainStyle" MEDIA="screen">
-		<link type="text/css" href="css/pepper-grinder/jquery-ui-1.7.2.custom.css" rel="stylesheet" />	
-	  	<script type="text/javascript" src="js/modernizr-2.5.3.min.js"></script>
-	</head>
-	<body>
-		<div id="main">
-			<form id="testForm">
-					<fieldset>
-						<legend>Data Validation</legend>
-						<label for="userName">User Name<span class="required">*</span>:</label> 
-						<input type="text" id="userName" required="required" name="userName">
-						<br/>
-						<label for="userEmail">Email Address<span class="required">*</span>:</label>
- 						<input type="email" id="userEmail" required="required" name="userEmail" pattern="[a-z0-9!#$%&s+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)" data-invalid-msg="Please write a properly formatted email">
-						<br>
-						<label for="userPhone">Primary Phone<span class="required">*</span>:</label> 
-						<input type="tel" id="userPhone" required="required" name="userPhone" pattern="[0-9]{10}" data-invalid-msg="Please write the phone number as 10 digits">
-						<br>
-						<label for="userCell">Cell Phone:</label> 
-						<input type="tel" id="userCell" name="userCell" pattern="[0-9]{10}"  data-invalid-msg="Please write the phone number as 10 digits">
-						<br>
-						<label for="description">Description<span class="required">*</span>:</label> 
-						<textarea id="description" required="required" name="description"></textarea>
-						<br><span id="counter"></span>
-						<br>
-						<button type="submit" name="submit" id="submitButton" >Submit</button>
-						<button value="Reset" name="Reset" id="resetButton" >Reset</button>
-				</fieldset>
-			</form>
-		</div>
-	</body>
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-  	<script type="text/javascript" src="js/form-validation.js"></script>
-	<script language="javascript" type="text/javascript">
-		function submitForm(e)
-		{
-			e.preventDefault();
-			var errors = [],
-				thisForm = $(this).closest('form');
-            
-            resetErrors();
+  <head>
+    <title>Testing form validation</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css" TITLE="MainStyle" MEDIA="screen">
+    <link type="text/css" href="css/pepper-grinder/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/modernizr-2.5.3.min.js"></script>
+  </head>
 
-			errors = Validator.validateForm($(thisForm).find('input, textarea, select'));
+  <body>
+    <div id="main">
+      <form id="testForm">
+        <fieldset>
+          <legend>Data Validation</legend>
+          <div>
+            <label for="userName">User Name<span class="required">*</span>:</label>
+            <input type="text" id="userName" required="required" name="userName">
+          </div>
+          <div>
+            <label for="userEmail">Email Address<span class="required">*</span>:</label>
+            <input type="email" id="userEmail" required="required" name="userEmail" pattern="[a-z0-9!#$%&s+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)" data-invalid-msg="Please write a properly formatted email">
+          </div>
+          <div>
+            <label for="userPhone">Primary Phone<span class="required">*</span>:</label>
+            <input type="tel" id="userPhone" required="required" name="userPhone" pattern="[0-9]{10}" data-invalid-msg="Please write the phone number as 10 digits">
+          </div>
+          <div>
+            <label for="userCell">Cell Phone:</label>
+            <input type="tel" id="userCell" name="userCell" pattern="[0-9]{10}" data-invalid-msg="Please write the phone number as 10 digits">
+          </div>
+          <div>
+            <label for="description">Description<span class="required">*</span>:</label>
+            <textarea id="description" required="required" name="description"></textarea>
+            <br><span id="counter"></span>
+          </div>
 
-			if(errors.length > 0) {
-				console.log("we have errors, display them to the user");
-                showErrors(errors);				
-			}
-		}
-		
-		$(document).ready(function() {
-		/* if you want to validate the field as the user tabs away from
-		the field or when the form is submitted, you can use the
-		below code */
-		/*	validator.listen(window,"load",function () {
-				validator.setup(document.getElementById("testForm"));
-			},false);
-		*/
-		
-			$('#submitButton').bind('click', submitForm);
-			$('#resetButton').bind('click', function(e) {
-				e.preventDefault();
+          <button type="submit" name="submit" id="submitButton">Submit</button>
+          <button value="Reset" name="Reset" id="resetButton">Reset</button>
+        </fieldset>
+      </form>
+    </div>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/form-validation.js"></script>
+  <script language="javascript" type="text/javascript">
+  function submitForm(e) {
+    e.preventDefault();
+    var errors = [];
+    var thisForm = $(this).closest('form');
 
-				var thisForm = $(this).closest('form');
-				$(thisForm).each(function() {
-					this.reset();
-				});
+    resetErrors();
 
-				resetErrors();
-			});
-	   });
-        
-        function showErrors(errors) {
-            var dataLen = errors.length;
-            
-            while(dataLen--) {
-            	var errorEl, error;
-                
-                errorEl = $('<div/>', {
-                    class: 'error'
-                });
-                
-                error = errors[dataLen];
-                
-                $(errorEl).text(error.errorMsg);
-                $('#' + error.formField)
-                    .addClass('error-highlight');
-                $(errorEl).insertAfter('#' + error.formField);
-            }
-        }
-        
-        function resetErrors() {
-            $('div.error').remove();
-            $('.error-highlight').removeClass('error-highlight');
-        }
+    errors = Validator.validateForm($(thisForm).find('input, textarea, select'));
 
-	</script>
+    if (errors.length > 0) {
+      console.log("we have errors, display them to the user");
+      showErrors(errors);
+    }
+  }
+
+  $(document).ready(function() {
+    /* if you want to validate the field as the user tabs away from
+    the field or when the form is submitted, you can use the
+    below code */
+    /*  validator.listen(window,"load",function () {
+        validator.setup(document.getElementById("testForm"));
+      },false);
+    */
+
+    $('#submitButton').bind('click', submitForm);
+    $('#resetButton').bind('click', function(e) {
+      e.preventDefault();
+
+      var thisForm = $(this).closest('form');
+      $(thisForm).each(function() {
+        this.reset();
+      });
+
+      resetErrors();
+    });
+  });
+
+  function showErrors(errors) {
+    var dataLen = errors.length;
+
+    while (dataLen--) {
+      var errorEl = $('<div/>', {
+          class: 'error'
+      });
+
+      var error = errors[dataLen];
+
+      $(errorEl).text(error.errorMsg);
+      $('#' + error.formField)
+        .addClass('error-highlight');
+      $(errorEl).insertAfter('#' + error.formField);
+    }
+  }
+
+  function resetErrors() {
+    $('div.error').remove();
+    $('.error-highlight').removeClass('error-highlight');
+  }
+  </script>
+
 </html>
