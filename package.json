@@ -1,0 +1,30 @@
+{
+  "name": "Form-validation",
+  "version": "0.0.8",
+  "description": "Form validation for a form that will checkk on the form field and validate all them returing an array of errors.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kianoshp/Form-validation.git"
+  },
+  "keywords": [
+    "form",
+    "validation"
+  ],
+  "author": "Kianosh Pourian",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kianoshp/Form-validation/issues"
+  },
+  "homepage": "https://github.com/kianoshp/Form-validation",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-babel": "^5.1.0",
+    "gulp-jscs": "^1.5.1",
+    "gulp-run": "^1.6.7",
+    "gulp-watch": "^4.2.4"
+  }
+}
