@@ -1,0 +1,22 @@
+{
+  "name": "Form-validation",
+  "version": "0.0.8",
+  "homepage": "https://github.com/kianoshp/Form-validation",
+  "authors": [
+    "kianoshp <kianoshp@gmail.com>"
+  ],
+  "description": "Form validation project",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "modernizr": "~2.8.3"
+  }
+}
