@@ -12,7 +12,7 @@
     <title>Testing form validation</title>
     <link rel="stylesheet" type="text/css" href="css/main.css" TITLE="MainStyle" MEDIA="screen">
     <link type="text/css" href="css/pepper-grinder/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
-    <script type="text/javascript" src="js/modernizr-2.5.3.min.js"></script>
+    <script type="text/javascript" src="bower_components/modernizr/modernizr.js"></script>
   </head>
 
   <body>
@@ -48,17 +48,21 @@
       </form>
     </div>
   </body>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-  <script type="text/javascript" src="js/form-validation.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/babel-es6-polyfill/node_modules/core-js/client/core.js"></script>
+  <script src="node_modules/babel-es6-polyfill/node_modules/core-js/client/shim.js"></script>
+  <script type="text/javascript" src="js/es5/form-validation.js"></script>
   <script language="javascript" type="text/javascript">
   function submitForm(e) {
     e.preventDefault();
     var errors = [];
-    var thisForm = $(this).closest('form');
+    var thisForm = e.currentTarget.parentElement.parentElement;
 
     resetErrors();
 
-    errors = Validator.validateForm($(thisForm).find('input, textarea, select'));
+    var inputs = thisForm.getElementsByTagName('input');
+    // var inputs['textarea'] = form.getElementByTag('textarea');
+    errors = Validator.validateForm(inputs);
 
     if (errors.length > 0) {
       console.log("we have errors, display them to the user");
