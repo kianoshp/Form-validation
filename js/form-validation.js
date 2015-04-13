@@ -41,7 +41,7 @@ window.Validator.debug = false;
         }
         if (!el.validity.valid) {
           el.setCustomValidity(' ');
-          logInfo(`${ elName } is an invalid field`);
+          logInfo('${ elName } is an invalid field`);
           return err = new validator.Err(el.id, invalidMsg);
         }
       } else {
