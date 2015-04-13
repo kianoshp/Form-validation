@@ -71,7 +71,7 @@ window.Validator.debug = false;
       let errors = [];
 
       let inputFields = Array.prototype.map.call(fields, f => f);
-      for(let [index, field] of inputFields.enteries()) {
+      for(let [index, field] of inputFields.entries()) {
         var error = validator.checkField(field);
         if (error) {
           errors.push(error);

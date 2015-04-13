@@ -86,7 +86,7 @@ window.Validator.debug = false;
     var _iteratorError = undefined;
 
     try {
-      for (var _iterator = inputFields.enteries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      for (var _iterator = inputFields.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         var _step$value = _slicedToArray(_step.value, 2);
 
         var index = _step$value[0];
